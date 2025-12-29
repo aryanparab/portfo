@@ -1,4 +1,4 @@
-// components/sections/About.tsx - 3-way split with Image Scroller
+// components/sections/About.tsx - 3-way split with Image Scroller and proper containers
 
 "use client";
 
@@ -18,27 +18,27 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <section className="min-h-screen w-full py-20 px-4 relative">
-      {/* Section Title */}
-      <div className="text-center mb-16 max-w-7xl mx-auto">
-        <AnimatedTitle variant="letterStagger">
-          ABOUT ME
-        </AnimatedTitle>
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="h-1 w-24 mx-auto mt-6"
-          style={{
-            background: 'linear-gradient(90deg, transparent, #F8E45F, transparent)',
-            boxShadow: '0 0 10px rgba(248, 228, 95, 0.5)',
-          }}
-        />
-      </div>
+    <section className="min-h-screen w-full py-20 px-4">
+      {/* Container wrapper for entire section */}
+      <div className="max-w-[1400px] mx-auto">
+        {/* Section Title */}
+        <div className="text-center mb-16">
+          <AnimatedTitle variant="letterStagger">
+            ABOUT ME
+          </AnimatedTitle>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="h-1 w-24 mx-auto mt-6"
+            style={{
+              background: 'linear-gradient(90deg, transparent, #F8E45F, transparent)',
+              boxShadow: '0 0 10px rgba(248, 228, 95, 0.5)',
+            }}
+          />
+        </div>
 
-      {/* Main Container */}
-      <div className="max-w-7xl mx-auto">
         {/* TOP HALF - Split Left/Right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* LEFT - Story Text */}
@@ -163,61 +163,64 @@ export const About: React.FC = () => {
             TECHNICAL SKILLS
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Object.entries(aboutData.technicalSkills).map(([category, skills], categoryIdx) => (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.6, delay: 0.6 + categoryIdx * 0.1 }}
-                className="space-y-3"
-              >
-                {/* Category Title */}
-                <h4
-                  className="text-lg font-semibold pb-2 mb-3"
-                  style={{
-                    color: '#F8E45F',
-                    fontFamily: 'Orbitron, sans-serif',
-                    borderBottom: '2px solid rgba(248, 228, 95, 0.3)',
-                  }}
+          {/* Constrained skills grid */}
+          <div className="max-w-[1200px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {Object.entries(aboutData.technicalSkills).map(([category, skills], categoryIdx) => (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.6, delay: 0.6 + categoryIdx * 0.1 }}
+                  className="space-y-3"
                 >
-                  {category}
-                </h4>
+                  {/* Category Title */}
+                  <h4
+                    className="text-lg font-semibold pb-2 mb-3"
+                    style={{
+                      color: '#F8E45F',
+                      fontFamily: 'Orbitron, sans-serif',
+                      borderBottom: '2px solid rgba(248, 228, 95, 0.3)',
+                    }}
+                  >
+                    {category}
+                  </h4>
 
-                {/* Skills List */}
-                <div className="space-y-2">
-                  {skills.map((skill, skillIdx) => (
-                    <motion.div
-                      key={skill}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: false }}
-                      transition={{
-                        duration: 0.4,
-                        delay: 0.8 + categoryIdx * 0.1 + skillIdx * 0.05,
-                      }}
-                      className="group flex items-center space-x-2"
-                    >
-                      {/* Bullet point */}
+                  {/* Skills List */}
+                  <div className="space-y-2">
+                    {skills.map((skill, skillIdx) => (
                       <motion.div
-                        className="w-2 h-2 rounded-full"
-                        style={{ background: '#F8E45F', boxShadow: '0 0 5px rgba(248, 228, 95, 0.5)' }}
-                        whileHover={{ scale: 1.5 }}
-                      />
-                      
-                      {/* Skill name */}
-                      <span
-                        className="text-sm group-hover:translate-x-1 transition-transform duration-200"
-                        style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                        key={skill}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: false }}
+                        transition={{
+                          duration: 0.4,
+                          delay: 0.8 + categoryIdx * 0.1 + skillIdx * 0.05,
+                        }}
+                        className="group flex items-center space-x-2"
                       >
-                        {skill}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                        {/* Bullet point */}
+                        <motion.div
+                          className="w-2 h-2 rounded-full flex-shrink-0"
+                          style={{ background: '#F8E45F', boxShadow: '0 0 5px rgba(248, 228, 95, 0.5)' }}
+                          whileHover={{ scale: 1.5 }}
+                        />
+                        
+                        {/* Skill name */}
+                        <span
+                          className="text-sm group-hover:translate-x-1 transition-transform duration-200"
+                          style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+                        >
+                          {skill}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

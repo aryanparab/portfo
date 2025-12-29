@@ -1,4 +1,4 @@
-// app/page.tsx - Main portfolio page with premium navigation and smooth scroll
+// app/page.tsx - Main portfolio page with proper container sizing
 
 "use client";
 
@@ -116,7 +116,6 @@ export default function Home() {
                       }
                     }}
                   >
-                    {/* Active indicator line */}
                     {activeSection === item.section && (
                       <motion.div
                         layoutId="activeSection"
@@ -126,7 +125,6 @@ export default function Home() {
                       />
                     )}
                     
-                    {/* Hover glow effect */}
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                       style={{
@@ -140,8 +138,7 @@ export default function Home() {
               ))}
             </ul>
 
-            {/* Dot indicators */}
-            {/* <motion.div
+            <motion.div
               className="mt-2 pt-2"
               style={{ borderTop: '1px solid rgba(248, 228, 95, 0.2)' }}
             >
@@ -163,7 +160,7 @@ export default function Home() {
                   />
                 ))}
               </div>
-            </motion.div> */}
+            </motion.div>
           </motion.div>
         </motion.nav>
 
@@ -190,7 +187,6 @@ export default function Home() {
         <AnimatePresence>
           {isMenuOpen && (
             <>
-              {/* Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -200,7 +196,6 @@ export default function Home() {
                 onClick={() => setIsMenuOpen(false)}
               />
 
-              {/* Menu */}
               <motion.div
                 initial={{ opacity: 0, x: '100%' }}
                 animate={{ opacity: 1, x: 0 }}
@@ -213,7 +208,6 @@ export default function Home() {
                 }}
               >
                 <div className="flex flex-col h-full p-6 pt-20">
-                  {/* Logo/Title */}
                   <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -233,7 +227,6 @@ export default function Home() {
                     </h2>
                   </motion.div>
 
-                  {/* Navigation Items */}
                   <ul className="space-y-2 flex-1">
                     {navigationItems.map((item, idx) => (
                       <motion.li
@@ -264,7 +257,6 @@ export default function Home() {
                     ))}
                   </ul>
 
-                  {/* Footer accent */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -288,34 +280,49 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        {/* Sections - Content over background */}
+        {/* Sections - Content over background with proper containers */}
         <div className="relative z-10">
+          {/* Hero - Full width (no container needed) */}
           <div id="section-0">
             <Hero />
           </div>
-          <div id="section-1">
-            <About />
+          
+          {/* About - Constrained container */}
+          <div id="section-1" className="w-full">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+              <About />
+            </div>
           </div>
-          <div id="section-2">
-            <Experience />
+          
+          {/* Experience - Constrained container */}
+          <div id="section-2" className="w-full">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+              <Experience />
+            </div>
           </div>
-          <div id="section-3">
-            <Projects />
+          
+          {/* Projects - Constrained container */}
+          <div id="section-3" className="w-full">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+              <Projects />
+            </div>
           </div>
-          <div id="section-4">
-            <Contact />
+          
+          {/* Contact - Constrained container */}
+          <div id="section-4" className="w-full">
+            <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+              <Contact />
+            </div>
           </div>
         </div>
 
-        {/* Footer */}
-        <footer
-          className="relative z-10 py-8 text-center"
-          style={{
-            borderTop: '1px solid rgba(248, 228, 95, 0.2)',
-            color: 'rgba(255, 255, 255, 0.5)',
-          }}
-        >
-          <p>© 2025 Aryan Parab. All rights reserved.</p>
+        {/* Footer - Full width with constrained content */}
+        <footer className="relative z-10 w-full" style={{ borderTop: '1px solid rgba(248, 228, 95, 0.2)' }}>
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <p className="text-center" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+              © 2025 Aryan Parab. All rights reserved.
+            </p>
+          </div>
         </footer>
       </main>
     </SmoothScrollWrapper>
