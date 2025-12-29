@@ -1,4 +1,4 @@
-// components/shared/SpaceBackground.tsx - THREE.js based deep space with 15,000+ stars
+// components/shared/SpaceBackground.tsx - Fixed for zoom 0.67
 
 "use client";
 
@@ -13,18 +13,28 @@ export const SpaceBackground: React.FC = () => {
     import('three').then((THREE) => {
       if (!containerRef.current) return;
 
+      // ZOOM FACTOR - adjust if you change zoom in globals.css
+      const ZOOM = 0.67;
+      
+      // Calculate actual viewport size accounting for zoom
+      const getActualSize = () => ({
+        width: window.innerWidth / ZOOM,
+        height: window.innerHeight / ZOOM
+      });
+
       // Scene setup
       const scene = new THREE.Scene();
+      const size = getActualSize();
       const camera = new THREE.PerspectiveCamera(
         75,
-        window.innerWidth / window.innerHeight,
+        size.width / size.height,
         0.1,
         2000
       );
       camera.position.z = 0;
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(size.width, size.height);
       renderer.setPixelRatio(window.devicePixelRatio);
       containerRef.current.appendChild(renderer.domElement);
 
@@ -88,8 +98,8 @@ export const SpaceBackground: React.FC = () => {
         vertexColors: true,
         transparent: true,
         opacity: 1.0,
-        sizeAttenuation: true, // Closer stars appear larger
-        blending: THREE.AdditiveBlending, // Glow effect
+        sizeAttenuation: true,
+        blending: THREE.AdditiveBlending,
         map: createCircleTexture(),
         depthWrite: false
       });
@@ -108,7 +118,7 @@ export const SpaceBackground: React.FC = () => {
         const i3 = i * 3;
         fgPositions[i3] = (Math.random() - 0.5) * 300;
         fgPositions[i3 + 1] = (Math.random() - 0.5) * 300;
-        fgPositions[i3 + 2] = (Math.random() * 80) - 20; // Closer to camera
+        fgPositions[i3 + 2] = (Math.random() * 80) - 20;
 
         fgColors[i3] = 1.0;
         fgColors[i3 + 1] = 1.0;
@@ -135,20 +145,21 @@ export const SpaceBackground: React.FC = () => {
       const foregroundStars = new THREE.Points(fgStarGeometry, fgStarMaterial);
       scene.add(foregroundStars);
 
-      // Mouse parallax
+      // Mouse parallax - adjust for zoom
       const handleMouseMove = (e: MouseEvent) => {
         mouseRef.current = {
-          x: (e.clientX / window.innerWidth) * 2 - 1,
-          y: -(e.clientY / window.innerHeight) * 2 + 1
+          x: (e.clientX / (window.innerWidth / ZOOM)) * 2 - 1,
+          y: -(e.clientY / (window.innerHeight / ZOOM)) * 2 + 1
         };
       };
       window.addEventListener('mousemove', handleMouseMove);
 
-      // Handle resize
+      // Handle resize - account for zoom
       const handleResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        const newSize = getActualSize();
+        camera.aspect = newSize.width / newSize.height;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(newSize.width, newSize.height);
       };
       window.addEventListener('resize', handleResize);
 
@@ -199,11 +210,14 @@ export const SpaceBackground: React.FC = () => {
 
   return (
     <>
-      {/* THREE.js container */}
+      {/* THREE.js container - scales with zoom */}
       <div
         ref={containerRef}
         className="fixed top-0 left-0 w-full h-full pointer-events-none"
-        style={{ zIndex: 1 }}
+        style={{ 
+          zIndex: 1,
+          transform: 'scale(1)', // Ensure it scales with parent zoom
+        }}
       />
       {/* Dark overlay for text readability */}
       <div
