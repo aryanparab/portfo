@@ -50,8 +50,9 @@ export const projectsData: ProjectsData = {
   image: "/images/Grocery.png",
   technologies: ["Python", "Streamlit", "Agent Workflows", "Data Processing"],
       links: {
-        github: "https://github.com/aryanparab/paper-recommender",
-        live: "https://aryanparab-grocery-list-generator-streamlit-app-dxclse.streamlit.app/groc"
+        github: "https://github.com/aryanparab/grocery-list-generator",
+        live: "https://aryanparab-grocery-list-generator-streamlit-app-dxclse.streamlit.app/groc",
+        watch: "https://drive.google.com/file/d/1gW5i3gI_a1QX9t67hLzP_tpa-QEh3NFY/view?usp=sharing"
       }
     },
     {
