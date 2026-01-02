@@ -190,8 +190,8 @@ const ScrollExpandMedia = ({
               left: 0,
               right: 0,
               bottom: 0,
-              width: '100vw',
-              height: '100vh',
+              width: 'full',
+              height: 'full',
               zIndex: 0,
               overflow: 'hidden',
             }}

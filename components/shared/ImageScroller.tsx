@@ -77,20 +77,20 @@ export const ImageScroller: React.FC<ImageScrollerProps> = ({
     >
       {/* Background glow */}
       <div
-        className="absolute inset-0 blur-3xl opacity-20"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(248, 228, 95, 0.3) 0%, transparent 70%)',
-        }}
+        // className="absolute"
+        // style={{
+        //   background:
+        //     'radial-gradient(circle, rgba(248, 228, 95, 0.3) 0%, transparent 70%)',
+        // }}
       />
 
       {/* Main Image Container */}
       <div 
-        className="relative w-full aspect-square rounded-xl overflow-hidden backdrop-blur-md"
+        // className="relative w-full aspect-square rounded-xl overflow-hidden backdrop-blur-md"
         style={{
-          background: 'rgba(0, 0, 0, 0.3)',
-          border: '1px solid rgba(248, 228, 95, 0.3)',
-          boxShadow: '0 8px 32px rgba(248, 228, 95, 0.2)',
+          // background: 'rgba(0, 0, 0, 0.3)',
+          // border: '1px solid rgba(248, 228, 95, 0.3)',
+          // boxShadow: '0 8px 32px rgba(248, 228, 95, 0.2)',
         }}
       >
         {/* Image with AnimatePresence for smooth transitions */}
@@ -184,7 +184,7 @@ export const ImageScroller: React.FC<ImageScrollerProps> = ({
         />
       </div>
 
-      {/* Dot Indicators */}
+      {/* Dot Indicators
       <div className="flex justify-center gap-2 mt-4">
         {images.map((_, idx) => (
           <button
@@ -202,7 +202,7 @@ export const ImageScroller: React.FC<ImageScrollerProps> = ({
             }}
           />
         ))}
-      </div>
+      </div> */}
 
       {/* Image Counter */}
       {/* <motion.div

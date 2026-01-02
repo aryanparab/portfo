@@ -286,8 +286,8 @@ export default function Home() {
             mediaType="image"
             mediaSrc="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop"
             bgImageSrc="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=1920&auto=format&fit=crop"
-            title="Aryan Parab"
-            subtitle="Full-Stack Developer"
+            title="Aryan Verse"
+            subtitle="AI Developer"
             scrollHint="Scroll to explore"
           >
             {/* About section appears after scroll expansion */}

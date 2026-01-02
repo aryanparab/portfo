@@ -119,21 +119,19 @@ export const About: React.FC = () => {
           </motion.div>
 
           {/* RIGHT - Image Scroller */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="backdrop-blur-md rounded-2xl overflow-hidden"
-            style={{
-              
-              border: '1px solid rgba(248, 228, 95, 0.3)',
-              boxShadow: '0 0 40px rgba(248, 228, 95, 0.1)',
-              minHeight: '500px',
-            }}
-          >
-            <ImageScroller images={images} autoPlayInterval={4000} />
-          </motion.div>
+ <motion.div
+  initial={{ opacity: 0, x: 50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+   className="w-full h-full object-cover rounded-2xl"
+    
+  style={{
+    minHeight: '500px',
+  }}
+>
+  <ImageScroller images={images} autoPlayInterval={4000} />
+</motion.div>
         </div>
 
         {/* BOTTOM HALF - Technical Skills */}
