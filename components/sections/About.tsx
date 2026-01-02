@@ -12,9 +12,6 @@ export const About: React.FC = () => {
   // Portfolio images - add your image paths here
   const images = [
     "/images/pokedeximg1.png",
-    "/images/pokedeximg2.png",
-    "/images/pokedeximg3.png",
-    "/images/pokedeximg4.png"
   ];
 
   return (
@@ -129,7 +126,7 @@ export const About: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="backdrop-blur-md rounded-2xl overflow-hidden"
             style={{
-              background: 'rgba(0, 0, 0, 0.3)',
+              
               border: '1px solid rgba(248, 228, 95, 0.3)',
               boxShadow: '0 0 40px rgba(248, 228, 95, 0.1)',
               minHeight: '500px',

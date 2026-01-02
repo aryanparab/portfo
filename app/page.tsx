@@ -1,9 +1,9 @@
-// app/page.tsx - Main portfolio page with proper container sizing
+// app/page.tsx - Portfolio with scroll expansion hero transition
 
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Hero } from '@/components/sections/Hero';
+import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero';
 import { About } from '@/components/sections/About';
 import { Experience } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
@@ -280,20 +280,27 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        {/* Sections - Content over background with proper containers */}
-        <div className="relative z-10">
-          {/* Hero - Full width (no container needed) */}
-          <div id="section-0">
-            <Hero />
-          </div>
-          
-          {/* About - Constrained container */}
-          <div id="section-1" className="w-full">
-            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-              <About />
+        {/* Scroll Expansion Hero (Hero → About transition) */}
+        <div id="section-0">
+          <ScrollExpandMedia
+            mediaType="image"
+            mediaSrc="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop"
+            bgImageSrc="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=1920&auto=format&fit=crop"
+            title="Aryan Parab"
+            subtitle="Full-Stack Developer"
+            scrollHint="Scroll to explore"
+          >
+            {/* About section appears after scroll expansion */}
+            <div id="section-1" className="w-full">
+              <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+                <About />
+              </div>
             </div>
-          </div>
-          
+          </ScrollExpandMedia>
+        </div>
+
+        {/* Other Sections - Content over background with proper containers */}
+        <div className="relative z-10">
           {/* Experience - Constrained container */}
           <div id="section-2" className="w-full">
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
